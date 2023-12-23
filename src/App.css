@@ -1,0 +1,70 @@
+/* app.css */
+.body {
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}
+
+#adminSignInimg {
+    background-image: url("./assets/UsserAssets/Untitled-3.png");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.signupimg {
+    background-image: url("./assets/UsserAssets/6310507.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.imgediv {
+    background-image: url("./assets/UsserAssets/yellow-car-with-number-70-side_1340-23401.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+.imgeuse {
+    background-image: url("./assets/UsserAssets/bohemian-man-with-his-arms-crossed.jpg");
+    background-size: cover;
+
+}
+
+
+@media (max-width: 768px) {
+    .flex-col.md\:flex-row {
+        flex-direction: column;  
+    }
+    
+    .md\:w-2\/2 {
+        width: 100%;  
+    }
+  
+    .h-\[35rem\].md\:h-auto {
+        height: auto; 
+    }
+}
+
+#signinimg {
+    background-image: url("../src/assets/AdminAssets/Untitled\ Project\ \(1\).jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  @media (max-width: 767px) {
+    #adminSignInimg {
+      display: none;
+    }
+  }
+
+
+  .sidebar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 20rem; /* Adjust the width as needed */
+    z-index: 1000; /* Adjust the z-index as needed */
+  }
+  
