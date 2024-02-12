@@ -17,6 +17,9 @@ const userSlice = createSlice({
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.mobile = action.payload.mobile;
+      state.houseName = action.payload.houseName;
+      state.state = action.payload.state;
+      state.district = action.payload.district;
       state.image = action.payload.image;
     },
 

@@ -48,11 +48,38 @@ export async function SignUpGoogle(googleData) {
 
 export async function GoogleLogin(googleData){
   try {
-      console.log("iam the googledata i reached here Login API ");
       const response = await userApi.post('/api/googlelogin', googleData)
-      console.log("iam the response of googlelogin from back-end ", response);
       return response
   } catch (error) {
     throw new Error(err); 
+  }
+}
+
+export async function fetchPropertiesApi(){
+  try {
+     const data = await userApi.post('/api/fetchprop')
+     return data
+  } catch (error) {
+    throw new Error(err);
+  }
+
+}
+
+export async function fetchUserDetailsApi(){
+   try {
+    const data = await userApi.post('/api/fetchuser')
+    return data
+   } catch (error) {
+    
+   }
+}
+
+export async function updateProfileApi(id, values){
+  try {
+     console.log("aim in the api of update profile", values);
+     const data = await userApi.post('/api/updateuserdetail', {id,values})
+     return data
+  } catch (error) {
+    
   }
 }

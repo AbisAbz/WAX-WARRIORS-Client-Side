@@ -59,7 +59,7 @@ function ServiceList() {
               </div>
               <div className="mt-5 flex justify-between items-center">
                 <div>
-                  <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
+                  <h5 className="text-gray-500 mb-2">
                   {description}
                   </h5>
                 </div>

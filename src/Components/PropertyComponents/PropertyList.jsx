@@ -42,6 +42,7 @@ export default function PropertyList() {
           <div className="p-3 px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
             {propertyData.map((items, index) => {
               const {
+                images,
                 _id,
                 propertyName,
                 state,
@@ -53,6 +54,14 @@ export default function PropertyList() {
                   key={index}
                   className="max-w-sm  bg-white   border border-[#00000027] rounded-md  dark:bg-gray-800 dark:border-gray-700"
                 >
+                   <div>
+                     <img
+                       className="object-fill h-[210px] w-full rounded-t-md"
+                       src={images[0]}
+                       alt=""
+                     />
+                    
+                  </div>
                    <Chip
                     variant="ghost"
                     size="sm"

@@ -18,26 +18,12 @@ import {
 export default function AddServices(props) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
-    // const [categoryFields, setCategoryFields] = useState([]);
-    // console.log("iam state of the category ", categoryFields)
-
-    // const createField = () => {
-    //   setCategoryFields((prevFields) => [...prevFields, '']);
-    // };
-  
-    // const handleFieldChange = (index, value) => {
-    //   const updatedFields = [...categoryFields];
-    //   updatedFields[index] = value;
-    //   setCategoryFields(updatedFields);
-    //   formik.setFieldValue('category', updatedFields.map((field) => ({ value: field })));
-    // };
 
     const formik = useFormik({
         initialValues:{
             id:props.id,
             name:'',
             price:'',
-            // category:categoryFields.map((field) => ({ value: field })),
             description:'',
               },
           validationSchema:serviceSchema,
@@ -68,16 +54,22 @@ export default function AddServices(props) {
               color="blue-gray"
               className="mb-2 font-medium"
             >
-              Service name
+              Select Your Service
             </Typography>
-            <Input
-              name = "name"
-              type="text"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
+            <select
+  name="name"
+  className="border-t border-b border-l border-r border-gray-300 rounded-md p-2"
+  onChange={formik.handleChange}
+  onBlur={formik.handleBlur}
+  value={formik.values.name}
+>
+  <option value="" disabled>Select an option</option>
+  <option value="Normal Wash">Normal Wash</option>
+  <option value="Body Wash">Body Wash</option>
+  <option value="Interior Wash">Interior Wash</option>
+  <option value="Full Body Wash">Full Body Wash</option>
+</select>
+
              {formik.touched.name && formik.errors.name && (
              <div className="text-pink-900 text-sm ">{formik.errors.name}</div>
            )}

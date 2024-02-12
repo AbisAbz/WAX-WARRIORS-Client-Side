@@ -77,11 +77,12 @@ export const propertySchema = Yup
         .max(50, 'Too Long!')
         .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
         .required('Please enter your Location'),
-  mobile: Yup
-        .number()
+mobile: Yup
+        .string()
+        .matches(/^[0-9]+$/, 'Please enter only numbers')
         .min(10)
         .max(10, 'Please Enter Your Correct Number')
-        .required('Please enter your Mobile No:'), 
+        .required('Please enter your Mobile No:'),
   describe:Yup
         .string()
         .min(5, 'Too short!')
@@ -96,14 +97,7 @@ export const propertySchema = Yup
         .shape({
    name:Yup
         .string()
-        .min(3, 'Too short!')
-        .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
-        .required('Please enter your Name'),
-//   category:Yup
-//         .string()
-//         .min(3, 'Too short!')
-//         .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
-//         .required('Please enter your category'),
+        .required('Please Select One Option'),
    price:Yup
         .number()
         .min(1)
@@ -115,6 +109,41 @@ export const propertySchema = Yup
         .required('Please enter Description')
         })
 
+
+export const ProfileUbdate = Yup
+        .object()
+        .shape({
+  name: Yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
+        .required('Please enter your Name'),
+houseName: Yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
+        .required('Please enter your house name'),
+ state: Yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
+        .required('Please enter your State'),
+district: Yup
+        .string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
+        .required('Please enter your district'),
+ mobile: Yup
+        .string()
+        .matches(/^[0-9]+$/, 'Please enter only numbers')
+        .min(10)
+        .max(10, 'Please Enter Your Correct Number')
+        .required('Please enter your Mobile No:'),
+      })
 
 
 

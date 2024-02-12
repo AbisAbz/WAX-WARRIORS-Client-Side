@@ -18,35 +18,62 @@ import { useSelector } from "react-redux";
 
 function PropertyAddingFrom(propFunc) {
   const [open, setOpen] = useState(false);
-  // const [img, setImg] = useState("");
   const handleOpen = () => setOpen((cur) => !cur);
   const propid = useSelector((state) => state.owner.id);
 
   const formik = useFormik({
-     initialValues: {
-      id:propid,
-       name :'',
-       slot :'',
-       country :'',
-       state :'',
-       district:'',
-       location:'',
-       mobile :'',
-       images: [],
-       describe:'',
-       status  : 'Pending',
-     },
-     validationSchema:propertySchema,
-     onSubmit:async(values) => {
-         try {
-          const response = await RegProperty(values)
-          handleOpen();
-          propFunc.propFunc(true)
-         } catch (error) {
-          console.log("iam the error in the onsubmit propreg " ,error);
-         }
-     }
-  })
+    initialValues: {
+      id: propid,
+      name: '',
+      slot: '',
+      country: '',
+      state: '',
+      district: '',
+      location: '',
+      mobile: '',
+      images: [],
+      describe: '',
+      status: 'Pending',
+    },
+    validationSchema: propertySchema,
+    onSubmit: async (values) => {
+      try {
+        console.log(" iam the values the user inserting the dtaa of his property ", values)
+        const formData = new FormData();
+        formData.append("id", values.id);
+        formData.append("name", values.name);
+        formData.append("slot", values.slot);
+        formData.append("country", values.country);
+        formData.append("state", values.state);
+        formData.append("district", values.district);
+        formData.append("location", values.location);
+        formData.append("mobile", values.mobile);
+        formData.append("describe", values.describe);
+        formData.append("status", values.status);
+  
+        for (let i = 0; i < values.images.length; i++) {
+          formData.append("images", values.images[i]);
+        }
+
+        
+        console.log("registration", formData);
+        const response = await RegProperty(formData);
+        handleOpen();
+        propFunc.propFunc(true);
+      } catch (error) {
+        console.log("iam the error in the onsubmit propreg ", error);
+      }
+    }
+  });
+  
+    
+
+  const handleImageChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    console.log(" iam the images of regprop ", selectedFiles);
+    formik.setFieldValue("images", selectedFiles);
+  };
+  
 
   return (
     <>
@@ -160,7 +187,7 @@ function PropertyAddingFrom(propFunc) {
                 {formik.touched.district && formik.errors.district && (
              <div className="text-pink-900 text-sm ">{formik.errors.district}</div>
            )}
-
+            
               </div>
               <div>
                 <Typography
@@ -183,6 +210,23 @@ function PropertyAddingFrom(propFunc) {
              )}
 
               </div>
+
+              <div>
+                <Typography  
+                 variant="small"
+                 color="blue-gray"
+                 className="mb-2 font-medium"
+                >
+                   Select the images
+                </Typography>
+                
+                <input 
+                type="file" 
+                accept="image/*"
+                multiple
+                onChange={handleImageChange}
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2  gap-4">
              
@@ -195,7 +239,7 @@ function PropertyAddingFrom(propFunc) {
                   Mobile number
                 </Typography>
                 <Input
-                  type="number"
+                  type="tel"
                   name="mobile"
                   className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                   onChange={formik.handleChange}
@@ -229,7 +273,7 @@ function PropertyAddingFrom(propFunc) {
             </div>
             </div>
           </div>
-      
+          
         </DialogBody>
         <DialogFooter>
           <Button
