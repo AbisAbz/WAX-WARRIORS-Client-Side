@@ -22,13 +22,12 @@ import {
 function ProfileComponent() {
   const {id, name, email, mobile, houseName,state, district} = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState(true);
 
   useEffect(() => {
     const fetchUserDetails = async() => {
        try {
         const response = await fetchUserDetailsApi();
-        console.log("aim the userdetails fetch ", response);
         if (response) {
           dispatch(setUserDetails({
             id     : response.data.data._id,
@@ -66,7 +65,7 @@ function ProfileComponent() {
         const response = await updateProfileApi(id, values)
         console.log("iam the response of the update ", response.data.message);
         setProfile(true);
-        GenerateSuccess(response.data.data.message);
+        GenerateSuccess(response.data.message);
       } catch (error) {
         console.log(error);
       }

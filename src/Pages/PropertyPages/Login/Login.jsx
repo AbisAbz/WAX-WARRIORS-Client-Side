@@ -26,11 +26,11 @@ export default function SimpleRegistrationForm() {
       onSubmit:async(values) => {
         try {
           const response = await propOwnLogin(values)
-          console.log("i came back after the awaiting over", response);
+          console.log("i came back after the awaiting over", response.data.exist);
   
           if(response.status === 200){
             console.log("iam in the response status", response.status);
-            localStorage.setItem("propertyToken", response.data.propertyToken)
+            localStorage.setItem("subAdminToken", response.data.subAdminToken)
             dispatch(setPropOwnerDetails({
                id     : response.data.exist._id,
                name   : response.data.exist.name,
@@ -108,7 +108,7 @@ export default function SimpleRegistrationForm() {
             <Typography color="gray" className="mt-4 text-center font-normal">
               Not Registered?{" "}
               <a href="/signup" className="font-medium text-gray-900">
-                Sign Up
+                Sign In
               </a>
             </Typography>
           </form>

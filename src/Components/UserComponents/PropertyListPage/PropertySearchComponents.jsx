@@ -1,9 +1,11 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import react, { useState } from "react";
 import { Input } from "@material-tailwind/react";
 import "../UserComponentCss/SearchComponent.css"
 import PropertySortComponents from "./PropertySortComponents";
 
 export default function PropertySearch() {
+  const [search, setSearch] = useState(0);
 
   return (
     <>
@@ -20,7 +22,7 @@ export default function PropertySearch() {
           />
         </div>
       </div>
-      <PropertySortComponents />
+      <PropertySortComponents  search={search}/>
     </>
   );
 }

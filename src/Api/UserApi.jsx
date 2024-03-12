@@ -55,9 +55,19 @@ export async function GoogleLogin(googleData){
   }
 }
 
-export async function fetchPropertiesApi(){
+export async function fetchPropertyToHome(){
   try {
-     const data = await userApi.post('/api/fetchprop')
+     const data = await userApi.get('/api/fetchprophome')
+     return data
+  } catch (error) {
+    throw new Error(err); 
+  }
+}
+
+export async function fetchPropertiesApi(propData){
+  try {
+    console.log("iam the api propdata ", propData);
+     const data = await userApi.post('/api/fetchprop',propData)
      return data
   } catch (error) {
     throw new Error(err);
@@ -70,16 +80,110 @@ export async function fetchUserDetailsApi(){
     const data = await userApi.post('/api/fetchuser')
     return data
    } catch (error) {
-    
+    throw new Error(err);
    }
 }
 
 export async function updateProfileApi(id, values){
   try {
-     console.log("aim in the api of update profile", values);
      const data = await userApi.post('/api/updateuserdetail', {id,values})
      return data
   } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function fetchAllPropRatingApi(){
+  try {
+    const data = await userApi.get('/api/fetchrating')
+    return data
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function fetchServiceApi(id){
+  try {
+    const data = await userApi.post('/api/fetchservice', id)
+    return data
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function postRatingApi(ratingData){
+  try {
+    const response = await userApi.post('/api/postrating', ratingData)
+    return response;
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+
+export async function slotBookingApi(bookingData){
+  try {
+    const response = await userApi.post('/api/postbookingdata', bookingData)
+    return response
     
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function fetchAllAvailableTimesApi(userBookedDate){
+  try {
+    const data = await userApi.post('/api/fetchAllAvailableTimes', userBookedDate )
+    return data
+    
+  } catch (error) {
+    throw new Error(err);
+  }
+
+
+}
+
+export async function PayementDetailsApi(bookingData){
+  try {
+    const data = await userApi.post('/api/payementprocedure',bookingData )
+    return data
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function stripeSuccesApi(bookData){
+   try {
+    const data = await userApi.put('/api/paymentsuccess', bookData)
+    return data
+   } catch (error) {
+    throw new Error(err);
+   }
+}
+
+export async function fetchAllUserSummaryApi(id,active){
+  try {
+     const data = await userApi.get(`/bookingsummery/${id}/${active}`)
+     return data
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function summaryViewDataApi(bookedId){
+  try {
+    const data = await userApi.post("/api/summaryViewData", bookedId)
+    return data;
+  } catch (error) {
+    throw new Error(err);
+  }
+}
+
+export async function cancelBookingApi(bookingId){
+  try {
+    const data = await userApi.post('/api/cancelbooking',bookingId)
+    return data
+  } catch (error) {
+    throw new Error(err);
   }
 }

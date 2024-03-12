@@ -77,6 +77,10 @@ export const propertySchema = Yup
         .max(50, 'Too Long!')
         .matches(/^[a-zA-Z\s]*$/, 'Special characters are not allowed in the Name')
         .required('Please enter your Location'),
+ openingTime: Yup.string()
+        .required("Please select a time"),
+ closingTime: Yup.string()
+        .required("Please select a time"),
 mobile: Yup
         .string()
         .matches(/^[0-9]+$/, 'Please enter only numbers')
@@ -144,6 +148,35 @@ district: Yup
         .max(10, 'Please Enter Your Correct Number')
         .required('Please enter your Mobile No:'),
       })
+
+export const ratingSchema = Yup
+        .object()
+        .shape({
+ rating: Yup
+        .number()
+        .min(1, "Rating must be atleast 1")
+        .required("please enter the rating"),
+description: Yup
+        .string()
+        .max(1000, "Description must be at most 1000 characters")
+        .required("please enter the description")
+
+        })
+
+
+export const bookingSchema = Yup
+        .object()
+        .shape({
+ bookDate: Yup.date()
+        .min(new Date(new Date().setHours(0, 0, 0, 0)), "Date must be today or later")
+        .max(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), "Date must be within the next 30 days")         
+        .required("Please select a date"),
+ bookTime: Yup.string()
+         .required("Please select a time"),
+bookServices: Yup.string()
+         .required("Please select any Services "),
+        });
+
 
 
 

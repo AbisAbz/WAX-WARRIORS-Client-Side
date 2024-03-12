@@ -8,7 +8,6 @@ const initialState = {
   image: "",
 };
 
-
 const propertySlice = createSlice({
   name: "property",
   initialState,
@@ -18,12 +17,12 @@ const propertySlice = createSlice({
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.mobile = action.payload.mobile;
-      state.image   = action.payload.image;
+      state.image = action.payload.image;
     },
-
-    propertOwnerLogOutDetails: (state, action) => initialState,
+    propertyOwnerLogOutDetails: (state, action) => initialState, 
   },
 });
 
-export const { setPropOwnerDetails, propertOwnerLogOutDetails } = propertySlice.actions;
+export const { setPropOwnerDetails, propertyOwnerLogOutDetails } = propertySlice.actions;
 export default propertySlice.reducer;
+

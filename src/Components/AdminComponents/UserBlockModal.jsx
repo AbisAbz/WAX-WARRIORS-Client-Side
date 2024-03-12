@@ -17,7 +17,6 @@ export default function DialogDefault(props) {
 
 
   const userBlock = async() => {
-    console.log("i reach in block function");
       const response = await userBlockApi(props)
       if(response) props.statusFunction(true);
       setOpen(!open)

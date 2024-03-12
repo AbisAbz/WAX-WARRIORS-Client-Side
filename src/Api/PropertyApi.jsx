@@ -24,9 +24,7 @@ export async function EmailVerify(id, token) {
 
 export async function propOwnLogin(propDetails) {
   try {
-    console.log("i reach in prop API first");
     const response = await subAdminApi.post('/proplogin', propDetails)
-    console.log("i reach in response after waiting property API");
     return response;
   } catch (error) {
     throw new Error(err);
@@ -35,9 +33,7 @@ export async function propOwnLogin(propDetails) {
 
 export async function fetchOwnerData() {
   try {
-    console.log("i reach in the fetchOwner API");
     const response = await subAdminApi.get('/api/prop')
-    console.log("iam the response of the fetchowner API", response);
     return response;
   } catch (error) {
     throw new Error('Error fetching users: ' + error.message);
@@ -80,18 +76,16 @@ export async function propertyView(id) {
 
 export async function postService(data) {
   try {
-    console.log(" iam in the postservice api", data);
-    const response = await subAdminApi.post('/api/service', data)
+    const response = await subAdminApi.post('/api/postservice', data)
     return response;
   } catch (error) {
     throw new Error('Error fetching users: ' + error.message);
   }
 }
 
-export async function fetchAllService() {
+export async function fetchAllService(id) {
   try {
-    console.log("i reach in api fetch all services ");
-    const response = await subAdminApi.get('/api/fetchallservice')
+    const response = await subAdminApi.post('/api/fetchallservice', id)
     return response
   } catch (error) {
     throw new Error('Error fetching users: ' + error.message);
@@ -106,3 +100,43 @@ export async function fetchPropertyOwner() {
     throw new Error('Error fetching users: ' + error.message);
   }
 }
+
+
+export async function EditProperty(propData) {
+  try {  
+    const data = await subAdminApi.post('/api/editprop',propData);
+    return data;
+  } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+  }
+}
+
+export async function hidePropertyApi(propId){
+  try {
+    console.log("iam the hide prop api ", propId);
+    const data = await subAdminApi.post("/api/hideproperty", propId)
+    return data;
+  } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+  }
+}
+
+export async function fetchAllBookingsApi(id){
+  try {
+    console.log("iam in teh api of fetch all bookings");
+    const data = await subAdminApi.post('/api/fetchbookings',id)
+    return data
+  } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+  }
+}
+
+export async function fetchAllDatasDashboardApi(id) {
+   try {
+     const data = await subAdminApi.post('/api/fetchalldatadash',id)
+     return data
+   } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+   }
+}
+

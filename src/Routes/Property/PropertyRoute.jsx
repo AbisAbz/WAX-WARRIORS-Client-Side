@@ -7,8 +7,8 @@ import PropertyLayout from '../../Layouts/PropertyLayout/PropertyLayout'
 import Home          from '../../Pages/PropertyPages/Home/Home'
 import Profile      from '../../Pages/PropertyPages/Profile/ProfilePage'
 import ViewDetails from '../../Pages/PropertyPages/ViewDetails/ViewDetails';
-import DummyImage from '../../Components/PropertyComponents/dummyImage';
-
+import BookingsListPage from '../../Pages/PropertyPages/BookingList/BookingsListPage';
+import DashboardPage from '../../Pages/PropertyPages/Dashboard/DashboardPage';
 import React from 'react'
                
 export default function PropertyRoute() {
@@ -23,11 +23,11 @@ export default function PropertyRoute() {
            <Route element={<PropertyProtect />}>
 
             <Route path="/" element={<PropertyLayout />}>
-            <Route  path="/" element={<Home />}/>
-            <Route path="/:id/:token" element={<Home />} /> 
+            <Route  path="/" element={<DashboardPage />}/>
+            <Route path="/:id/:token" element={<DashboardPage />} /> 
             <Route path='/profile' element={<Profile />} />
             <Route path='/view' element={<ViewDetails />} />
-            <Route path='/dummy' element={<DummyImage />} />
+            <Route path='/bookinglist' element={<BookingsListPage />} />
              
             </Route>
            

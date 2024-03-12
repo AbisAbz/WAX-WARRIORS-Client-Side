@@ -7,6 +7,8 @@ import {
   DialogFooter,
   Typography,
   Input,
+  Select,
+  Option,
   Textarea,
 } from "@material-tailwind/react";
 import { propertySchema } from '../../Schema/Authentication'
@@ -21,6 +23,26 @@ function PropertyAddingFrom(propFunc) {
   const handleOpen = () => setOpen((cur) => !cur);
   const propid = useSelector((state) => state.owner.id);
 
+  let timesAvailable = ["06:00 AM",
+  "07:00 AM",
+  "08:00 AM",
+  "09:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM",
+  "05:00 PM",
+  "06:00 PM",
+  "07:00 PM",
+  "08:00 PM",
+  "09:00 PM",
+  "10:00 PM",
+  "11:00 PM",
+  ]
+
   const formik = useFormik({
     initialValues: {
       id: propid,
@@ -30,6 +52,8 @@ function PropertyAddingFrom(propFunc) {
       state: '',
       district: '',
       location: '',
+      openingTime: '',
+      closingTime: '',
       mobile: '',
       images: [],
       describe: '',
@@ -38,7 +62,6 @@ function PropertyAddingFrom(propFunc) {
     validationSchema: propertySchema,
     onSubmit: async (values) => {
       try {
-        console.log(" iam the values the user inserting the dtaa of his property ", values)
         const formData = new FormData();
         formData.append("id", values.id);
         formData.append("name", values.name);
@@ -47,6 +70,8 @@ function PropertyAddingFrom(propFunc) {
         formData.append("state", values.state);
         formData.append("district", values.district);
         formData.append("location", values.location);
+        formData.append("openingTime", values.openingTime);
+        formData.append("closingTime", values.closingTime);
         formData.append("mobile", values.mobile);
         formData.append("describe", values.describe);
         formData.append("status", values.status);
@@ -207,6 +232,55 @@ function PropertyAddingFrom(propFunc) {
                 />
              {formik.touched.location && formik.errors.location && (
              <div className="text-pink-900 text-sm ">{formik.errors.location}</div>
+             )}
+
+              </div>
+              <div>
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="mb-2 font-medium"
+                >
+                  Select your  Opening Time
+                </Typography>
+                <Select
+            variant="standard"
+            name="openingTime"
+            onChange={(time) => formik.setFieldValue('openingTime', time)}
+            onBlur={formik.handleBlur}
+            value={formik.values.openingTime}
+          >
+            {timesAvailable
+              .map((time) => (
+                <Option key={time} value={time}>{time}</Option>
+              ))}
+          </Select>
+             {formik.touched.openingTime && formik.errors.openingTime && (
+             <div className="text-pink-900 text-sm ">{formik.errors.openingTime}</div>
+             )}
+
+              </div>
+              <div>
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="mb-2 font-medium"
+                >
+                  Select your Closing Time
+                </Typography>
+                <Select
+            variant="standard"
+            name="closingTime"
+            onChange={(time) => formik.setFieldValue('closingTime', time)}
+            onBlur={formik.handleBlur}
+            value={formik.values.closingTime}
+          >
+            {timesAvailable.map((time) => (
+                <Option key={time} value={time}>{time}</Option>
+              ))}
+          </Select>
+             {formik.touched.closingTime && formik.errors.closingTime && (
+             <div className="text-pink-900 text-sm ">{formik.errors.closingTime}</div>
              )}
 
               </div>

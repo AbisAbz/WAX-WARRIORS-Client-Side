@@ -23,7 +23,7 @@ export default function FooterWithSitemap() {
       <div className="mx-auto w-full max-w-7xl px-4 pt-8 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {LINKS.map(({ title, items }) => (
-            <div key={title}>
+            <div key={title} className="mb-8 md:mb-0">
               <Typography
                 variant="small"
                 color="blue-gray"

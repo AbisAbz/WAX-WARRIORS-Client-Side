@@ -1,77 +1,60 @@
 import React,{useEffect, useState} from 'react'
-import { Button, Chip } from "@material-tailwind/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Typography,
+} from '@material-tailwind/react';
 import { fetchAllService } from '../../Api/PropertyApi'
+import AddServices from './AddServices';
+import DialogDefault from './PropertyFullDetails-Service';
 
-function ServiceList() {
+function ServiceList({id}) {
        const [serviceData, setServiceData] = useState([])
-        const [status, setStatus] = useState(false)
 
-        function propFunc(){
-            setStatus(true)
-        }
+
 
        useEffect(() => {
         const fetchServiceData = async() => {
             try {
-                const response = await fetchAllService();
+                const response = await fetchAllService({id:id});
                  if(response) setServiceData(response.data.data);
-                 setStatus(false);
             } catch (error) {
                 console.log('iam the error in the useEffect ', error);
             }
         }
         fetchServiceData();
-       },[status])
+       },[id])
+
        
   return (
-    <div className="px-4 pb-5">
-    <div className="px-4 rounded-md dark:border-gray-700">
-      <div className="w-full grid grid-cols-1 bg-white border border-gray-200 rounded-lg shadow">
-
-        <div className="p-3 px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-        {serviceData.map((items, index) => {
-              const {
-                serviceName,
-                price,
-                description,
-              } = items;
-              return (
-                <div
-                  key={index}
-                  className="max-w-sm  bg-white   border border-[#00000027] rounded-md  dark:bg-gray-800 dark:border-gray-700"
-                >
-                   <Chip
-                    variant="ghost"
-                    size="sm"
-                    color={ "red"}
-                    className="rounded-none"
-                  />
-            <div className="p-5">
-              <h6 className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
-              {serviceName}
-              </h6>
-              <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-              {price}
-              </p>
-
-              <div className="mt-4">
-                <hr className="border-1 border-gray-400" />
-              </div>
-              <div className="mt-5 flex justify-between items-center">
-                <div>
-                  <h5 className="text-gray-500 mb-2">
-                  {description}
-                  </h5>
-                </div>
-              </div>
-            </div>
-          </div>
-                        );
-                    })}
-        </div>
-      </div>
+    <>
+     {serviceData.length < 4 && <AddServices id={id} serviceData={serviceData} />}
+     <div className="flex gap-5 overflow-x-auto propertyScroll" id="propertyScrollHandler">
+    {serviceData &&
+      serviceData.map((item, index) => (
+        <Card key={index} className="mt-6 w-96 shadow-xl bg-brown-50 shadow-black" style={{ maxWidth: '300px' }}>
+          <CardBody>
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+              {item.serviceName}
+            </Typography>
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+              ₹ {item.price}
+            </Typography>
+            <Typography>
+              {item.description.split(' ').slice(0, 30).join(' ')}
+              {item.description.split(' ').length > 30 ? '...' : ''}
+            </Typography>
+          </CardBody>
+          <CardFooter className="pt-0">
+            <DialogDefault data={item} />
+          </CardFooter>
+        </Card>
+      ))
+    }
     </div>
-  </div>
+
+  </>
  )
   }
 

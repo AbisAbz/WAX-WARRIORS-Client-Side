@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik';
 import { serviceSchema } from '../../Schema/Authentication'
 import { postService } from '../../Api/PropertyApi'
 import { GenerateSuccess } from '../../Toast/Toast';
+import eventBus from './EvenyBus';
 import {
     Button,
     Dialog,
@@ -15,13 +16,35 @@ import {
   } from "@material-tailwind/react";
 
 
-export default function AddServices(props) {
+export default function AddServices({id, serviceData}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
+    console.log("iam the s4rvce data ", serviceData);
+    console.log("iam the s4rvce id ", id);
+
+    const [emitter, setEmitter] = useState(false)
+
+
+    useEffect(() => {
+      console.log("iam emitter in  the add service  page of child  ", emitter);
+    },[emitter])
+
+    useEffect(() => {
+      if(emitter === true){
+        console.log("iam the person in the yseEffect emmietter in the add service " );
+      const sendDataToParent = () => {
+        const abis = "hello abis how are you"
+        eventBus.emit('dataEvent', emitter, abis);
+      };
+      sendDataToParent()
+    }
+
+    },[emitter])
+  
 
     const formik = useFormik({
         initialValues:{
-            id:props.id,
+            id:id,
             name:'',
             price:'',
             description:'',
@@ -30,18 +53,24 @@ export default function AddServices(props) {
           onSubmit:async(values) => {
              handleOpen();
             try {
-              console.log("iam in the useformik ", values)
+              console.log("iam the values of post servicing  in the useformik ", values)
               const response = await postService(values)
-              if(response) GenerateSuccess("Your service has been created")
+               console.log("oiam the response post service ", response);
+              if(response) {
+                GenerateSuccess("Your service has been created")
+                setEmitter(true)
+              }
             } catch (error) {
               
             }
           }
 
     })
+
+
   return (
     <>
-    <Button  variant="gradient" onClick={handleOpen}>
+    <Button  variant="gradient" onClick={handleOpen} className="mt-10">
       Add Service
     </Button>
     <Dialog    open={open} handler={handleOpen}>
@@ -64,11 +93,21 @@ export default function AddServices(props) {
   value={formik.values.name}
 >
   <option value="" disabled>Select an option</option>
-  <option value="Normal Wash">Normal Wash</option>
-  <option value="Body Wash">Body Wash</option>
-  <option value="Interior Wash">Interior Wash</option>
-  <option value="Full Body Wash">Full Body Wash</option>
+  <option value="Normal Wash" disabled={serviceData.some((e) => e.serviceName === "Normal Wash")}>
+    Normal Wash
+  </option>
+  <option value="Body Wash" disabled={serviceData.some((e) => e.serviceName === "Body Wash")}>
+    Body Wash
+  </option>
+  <option value="Interior Wash" disabled={serviceData.some((e) => e.serviceName === "Interior Wash")}>
+    Interior Wash
+  </option>
+  <option value="Full Body Wash" disabled={serviceData.some((e) => e.serviceName === "Full Body Wash")}>
+    Full Body Wash
+  </option>
 </select>
+
+
 
              {formik.touched.name && formik.errors.name && (
              <div className="text-pink-900 text-sm ">{formik.errors.name}</div>
@@ -95,31 +134,6 @@ export default function AddServices(props) {
              <div className="text-pink-900 text-sm ">{formik.errors.price}</div>
            )}
            </div>
-
-           
-           {/* <div className="my-3">
-      <p className="text-blue-gray mb-2 font-medium text-sm">Add your Categories</p>
-      <Button onClick={createField} >
-        ADD
-      </Button>
-
-      {categoryFields.map((field, index) => (
-        <div key={index} className="mt-2">
-          <label className="block text-sm text-gray-600">Category {index + 1}</label>
-          <input
-            type="text"
-            value={field}
-            onChange={(e) => handleFieldChange(index, e.target.value)}
-            className="mt-1 p-2 border rounded-md w-full"
-          />
-                       {formik.touched.category && formik.errors.category && (
-             <div className="text-pink-900 text-sm ">{formik.errors.category}</div>
-           )}
-        </div>
-        
-      ))}
-    </div> */}
-
 
             <div className="grid grid-cols-2  gap-4">
              

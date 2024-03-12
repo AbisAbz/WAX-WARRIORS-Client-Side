@@ -1,6 +1,10 @@
 import axios from 'axios'
 import { GenerateError } from '../Toast/Toast'
 
+const axiosInterceptorInstance = axios.create({
+  baseURL: import.meta.env.VITE_USER_URL,
+});
+
 
    
       //======= User Back-end Connect =========//
@@ -40,11 +44,11 @@ export const propertyAxiosIntreditInstance = axios.create({
          //======= Token For subAdmin =========//
         adminAxiosIntreditInstance.interceptors.request.use((req) => {
 
-         const propertyToken = localStorage.getItem("propertyToken");
+         const subAdminToken = localStorage.getItem("subAdminToken");
          
-         if(propertyToken) {
+         if(subAdminToken) {
         
-        req.headers.Authorization = " Bearer " + propertyToken
+        req.headers.Authorization = " Bearer " + subAdminToken
       }
 
          return req;
@@ -123,3 +127,4 @@ export const propertyAxiosIntreditInstance = axios.create({
 
 
 
+      export default axiosInterceptorInstance;

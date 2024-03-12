@@ -46,6 +46,8 @@ export default function PropertyList() {
                 _id,
                 propertyName,
                 state,
+                district,
+                location,
                 country,
                 status,
               } = items;
@@ -62,11 +64,11 @@ export default function PropertyList() {
                      />
                     
                   </div>
-                   <Chip
+                  <Chip
                     variant="ghost"
                     size="sm"
-                    value={status}
-                    color={ "red"}
+                    value={status ? "approved" : "rejected"}
+                    color={status ? "green" : "red"}
                     className="rounded-none"
                   />
                   <div className="p-5">
@@ -75,7 +77,7 @@ export default function PropertyList() {
                    
                     </h6>
                     <p className="mb-4 font-normal text-gray-700 dark:text-gray-400">
-                      {country}
+                      {state}, {district}, {location}
                     </p>
                    
                     <div className="mt-4">
@@ -84,7 +86,7 @@ export default function PropertyList() {
                     <div className="mt-5 flex justify-between items-center">
                       <div> 
                         <h5 className="ont-san text-2xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
-                           {state}
+                          <span className="italic text-blue-gray-600">{country.toUpperCase()}</span> 
                         </h5>
                       </div>
                       <div className="pt-3 sm:pt-0">

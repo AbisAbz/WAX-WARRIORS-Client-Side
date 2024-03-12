@@ -1,22 +1,26 @@
-
 import userReducer from '../Redux/UserSlice'
-import propertyReducer from '../Redux/PropertySlice'
+import propertyOwnerReducer from '../Redux/PropertySlice'
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit";
 
-const persistConfig = {
-  key: 'root',
+const userPersistConfig = {
+  key: 'user',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
-const persistedPropertyReducer = persistReducer(persistConfig, propertyReducer);
+const propertyOwnerPersistConfig = {
+  key: 'propertyOwner',
+  storage,
+};
+
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+const persistedPropertyOwnerReducer = persistReducer(propertyOwnerPersistConfig, propertyOwnerReducer);
 
 const store = configureStore({
   reducer: {
-    user: persistedReducer,
-    owner: persistedPropertyReducer
+    user: persistedUserReducer,
+    owner: persistedPropertyOwnerReducer
   },
 });
 

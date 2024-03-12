@@ -1,8 +1,21 @@
-import { MagnifyingGlassIcon, PencilIcon } from "@heroicons/react/24/outline";
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Chip, IconButton, Input, Tooltip, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { fetchUsers } from "../../Api/AdminApi";
-import DialogDefault from "../AdminComponents/UserBlockModal";
+   import { MagnifyingGlassIcon, PencilIcon } from "@heroicons/react/24/outline";
+   import { useEffect, useState } from "react";
+   import { fetchUsers } from "../../Api/AdminApi";
+   import DialogDefault from "../AdminComponents/UserBlockModal";
+   import { 
+    Avatar,
+    Button, 
+    Card, 
+    CardBody, 
+    CardFooter, 
+    CardHeader, 
+    Chip, 
+    Input, 
+    Tooltip, 
+    Typography 
+   }from "@material-tailwind/react";
+
+
 
 const MembersTable = () => {
   const [userData, setUserData] = useState([]);
