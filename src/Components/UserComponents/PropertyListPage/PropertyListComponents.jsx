@@ -28,7 +28,7 @@ export default function PropertyListComponents({propertyList}) {
                 <div>
                   <img 
                     className="object-fill h-[210px] w-full rounded-t-md"
-                    src={images[1]} 
+                    src={images[0]} 
                     alt=""
                   />
                 </div>

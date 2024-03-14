@@ -34,8 +34,9 @@
          if(userBookedDate !== null){
         const fetchAllAvailableTimes = async() => {
           try {
+            console.log("user booked date", userBookedDate);
             const rightUserBookedDate = moment(userBookedDate).format('DD-MM-YYYY');
-            
+            console.log("rechanged the user booked date ", rightUserBookedDate);
   const response = await fetchAllAvailableTimesApi({date:rightUserBookedDate, slot:item.slot, openingTime:item.openingTime, closingTime:item.closingTime, propId:item._id })   
     settimesAvailable(response.data.availableTimes)     
           } catch (error) {

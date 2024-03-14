@@ -59,18 +59,27 @@ export default function PropertyList() {
                    <div>
                      <img
                        className="object-fill h-[210px] w-full rounded-t-md"
-                       src={images[0]}
+                       src={images[2]}
                        alt=""
                      />
                     
                   </div>
                   <Chip
-                    variant="ghost"
-                    size="sm"
-                    value={status ? "approved" : "rejected"}
-                    color={status ? "green" : "red"}
-                    className="rounded-none"
-                  />
+                      variant="ghost"
+                      size="sm"
+                      value={status}
+                      color={
+                        status === 'approved' ? 'green' :
+                        status === 'Pending' ? 'orange' :
+                        status === 'Rejected' ? 'red' : ''
+                      }
+                      className="rounded-none"
+                    />
+
+
+
+
+
                   <div className="p-5">
                     <h6 className="font-san mb-1 text-xl font-normal leading-6 tracking-tight text-[#1e1e1e]">
                       {propertyName}

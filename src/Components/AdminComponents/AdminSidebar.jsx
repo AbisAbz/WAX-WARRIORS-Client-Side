@@ -1,23 +1,34 @@
+import React from "react";
 import {
+  Card,
   Typography,
   List,
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
+import { FaCommentAlt } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 import {
   PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
  
 export default function DefaultSidebar() {
+  const navigate = useNavigate(); 
+ 
+ const adminLogout = () => {
+  
+      localStorage.removeItem('adminToken')
+      navigate('/admin/login')
+ }
+
   return (
-    <div className="h-[calc(100vh-2rem)] w-full max-w-[18rem] p-4 shadow-blue-gray-900/5 bg-blue-gray-400">
+    <Card className="h-screen md:h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-black sticky top-0">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           Sidebar
@@ -28,42 +39,30 @@ export default function DefaultSidebar() {
           <ListItemPrefix>
             <PresentationChartBarIcon className="h-5 w-5" />
           </ListItemPrefix>
-          Dashboard
+          <Link to="/admin"><span>Your Dashboard</span></Link>
         </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <ShoppingBagIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          E-Commerce
-        </ListItem>
+
         <ListItem>
           <ListItemPrefix>
             <InboxIcon className="h-5 w-5" />
           </ListItemPrefix>
-          Inbox
-          <ListItemSuffix>
-            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-          </ListItemSuffix>
+          <Link to="/admin/userlist"><span >Your Userlist</span></Link>
+          <ListItemSuffix></ListItemSuffix>
         </ListItem>
         <ListItem>
           <ListItemPrefix>
-            <UserCircleIcon className="h-5 w-5" />
+            <FaCommentAlt className="h-5 w-5" />
           </ListItemPrefix>
-          Profile
+          <Link to="/admin/propertylist"><span >Property List</span></Link>
+         
         </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <Cog6ToothIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Settings
-        </ListItem>
-        <ListItem>
+        <ListItem onClick={adminLogout}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
+          </ListItemPrefix >
           Log Out
         </ListItem>
       </List>
-    </div>
+    </Card>
   );
 }

@@ -7,6 +7,7 @@ import UserList           from '../../Pages/AdminPages/UserListPage/UserListPage
 import AdminPublic      from "./Public/AdminPublic";
 import AdminProtect   from "./Protect/AdminProtect";
 import PropertyList from "../../Components/AdminComponents/PropertyList"
+import AdminDashboard from "../../Components/AdminComponents/AdminDashboard";
 export default function AdminRoute() {
   return (
     
@@ -16,7 +17,7 @@ export default function AdminRoute() {
        </Route>
        <Route element={<AdminProtect />}>
        <Route path="/" element={<AdminLayout/>} >
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<AdminDashboard />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/propertylist" element={<PropertyList />} />
         </Route>

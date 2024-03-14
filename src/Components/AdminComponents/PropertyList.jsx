@@ -1,6 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Chip, IconButton, Input, Tooltip,Tab, Typography,  Tabs, TabsHeader, } from "@material-tailwind/react";
+import { Avatar, 
+  Button, 
+  Card, 
+  CardBody, 
+  CardFooter, 
+  CardHeader, 
+  Chip, 
+  IconButton, 
+  Input, 
+  Tooltip,
+  Tab, 
+  Typography, 
+   Tabs, 
+   TabsHeader,
+   TabsBody,
+   } from "@material-tailwind/react";
 import { fetchPropData } from '../../Api/AdminApi';
 import { propAprove } from '../../Api/AdminApi'
 import  DialogDefault from '../AdminComponents/RejectModal'
@@ -14,12 +29,12 @@ function PropertyList() {
     const TABS = [
       {
         label: "Property",
-        value: "Property List",
+        value: 1,
         switchTo: "Approved",
       },
       {
         label: "Notification",
-        value: "Requestes",
+        value: 2,
         switchTo: "Pending",
       },
     ];
@@ -29,8 +44,9 @@ function PropertyList() {
 
         const fetchData = async() => {
             try {
-                const response = await fetchPropData(switchbtn)
-                if(response) setPropData(response.data.response);
+                const response = await fetchPropData()
+                console.log("hellooo", response.data.filtredPropData);
+                if(response) setPropData(response.data.filtredPropData);
                 setStatus(false)
 
             } catch (error) {
@@ -75,24 +91,6 @@ function PropertyList() {
           </div>
 
         </div>
-        <div className="mr-6">
-          <div className='mb-2'>
-          <Tabs value="all" className="w-full md:w-max">
-         <TabsHeader>
-          {TABS.map(({ label, value, switchTo }) => (
-          <Tab key={value} value={value} onClick={() => handleTabClick(switchTo)}>
-             &nbsp;&nbsp;{label}&nbsp;&nbsp;
-          </Tab>
-          ))}
-         </TabsHeader>
-         </Tabs>
-
-          </div>
-             <Input
-               label="Search"
-             icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                />
-            </div>
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
@@ -119,7 +117,7 @@ function PropertyList() {
               <tr key={user.propertyName}>
                 <td className="p-4 border-b border-blue-gray-50">
                   <div className="flex items-center gap-3">
-                    <Avatar src={"https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"} alt={user.name} size="sm" />
+                    <Avatar src={user.images[2]}  size="sm" />
                     <div className="flex flex-col">
                       <Typography
                         variant="small"
@@ -171,26 +169,30 @@ function PropertyList() {
                       variant="ghost"
                       size="sm"
                       value={user.status}
-                      color={"green"}
+                      color={ user.status === 'approved' ? 'green' : user.status === 'Rejected' ? 'red' : ''
+                    }
                     />
                   </div>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
-                    <div className='flex '>
-                    <div className="w-max">
-                  <Button
-                 className="bg-light-green-600 rounded-md font-medium"
-                 size="sm" 
-                 onClick={()=>aproveFunc(user._id)}
-                 >
-                    Approve
-               </Button>
-                  </div>
-                  <div className="w-max ml-8">
-                <DialogDefault  id={user._id} rejectFunc={rejectFunc}/>
-                  </div>
-                    </div>
-                </td>
+                     {user.status === 'Pending' && (
+                  <div className='flex'>
+                             <div className="w-max">
+                                 <Button
+                    className="bg-light-green-600 rounded-md font-medium"
+                    size="sm"
+                    onClick={() => aproveFunc(user._id)}
+                                 >
+                                     Approve
+                                 </Button>
+                             </div>
+                             <div className="w-max ml-8">
+                                 <DialogDefault id={user._id} rejectFunc={rejectFunc} />
+                             </div>
+                         </div>
+                     )}
+                 </td>
+
                  
                 </tr>
             ))}

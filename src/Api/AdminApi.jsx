@@ -38,9 +38,9 @@ export async function fetchUsers() {
   }
 
 
- export async function fetchPropData(switchbtn){
+ export async function fetchPropData(){
   try {
-     const response = await adminApi.post('/api/propertylist', {message:switchbtn})
+     const response = await adminApi.get('/api/propertylist')
      return response
   } catch (error) {
     throw new Error('Error fetching users: ' + error.message);
@@ -64,6 +64,16 @@ export async function fetchUsers() {
     } catch (error) {
       throw new Error('Error fetching users: ' + error.message);
     }
+ }
+
+ export async function fetchDashBoardApi(){
+  try {
+    console.log("hahahahha");
+    const data = await adminApi.get('/api/fetchdashboard')
+    return data
+  } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+  }
  }
 
 
