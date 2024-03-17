@@ -38,7 +38,6 @@ const  { id}  = useSelector((state) => state.owner);
     useEffect(() => {
         const fetchAllBookings = async() => {
            const response = await fetchAllBookingsApi({id:id});
-           console.log("iam the response ", response.data.data);
            setAllBookings(response.data.data)
            setLoading(true)
 

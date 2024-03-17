@@ -61,7 +61,6 @@ export default function GoogleSignup() {
         googleLogout();
         setProfile(null);
     };
-    console.log("iam the userState", user);
    
     return (
         <div>

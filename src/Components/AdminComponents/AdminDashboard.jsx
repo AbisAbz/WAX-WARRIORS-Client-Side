@@ -1,7 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import { AgChartsReact } from "ag-charts-react";
 import { fetchDashBoardApi } from '../../Api/AdminApi';
-import { useSelector } from 'react-redux';
 
 export default function AdminDashboard() {
     const [totalProperty, setTotalProperty] = useState(null);

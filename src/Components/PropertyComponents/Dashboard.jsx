@@ -14,7 +14,6 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchAllDatas = async () => {
             try {
-                console.log("hvsvdcds ",owner);
                 const response = await fetchAllDatasDashboardApi({ id: owner });
                 setTotalBooking(response.data.totalBooking);
                 setTotalUsers(response.data.totalUsers);

@@ -2,7 +2,6 @@ import { Button, Rating } from "@material-tailwind/react";
 import React,{useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { GenerateError } from '../../../Toast/Toast'
-import { fetchAllPropRatingApi } from "../../../Api/UserApi";
 import image1 from '../../../assets/UsserAssets/loading-bar_4461744.png'
 import "./PropertyListComponents.css"
 
@@ -19,7 +18,7 @@ export default function PropertyListComponents({propertyList}) {
       {propertyList ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-x-2 main-sectioon mb-8 mt-10 mx-auto md:mx-14">
           {propertyList.map((item, index) => {
-            const { images, propertyName, state, district, location , mobile,_id, avgRating } = item;
+            const { images, propertyName, state, district, location , mobile, avgRating } = item;
             return (
               <div
                 key={index}

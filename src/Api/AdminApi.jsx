@@ -68,7 +68,6 @@ export async function fetchUsers() {
 
  export async function fetchDashBoardApi(){
   try {
-    console.log("hahahahha");
     const data = await adminApi.get('/api/fetchdashboard')
     return data
   } catch (error) {

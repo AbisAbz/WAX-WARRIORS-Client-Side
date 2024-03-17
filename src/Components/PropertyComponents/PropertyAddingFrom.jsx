@@ -81,7 +81,6 @@ function PropertyAddingFrom(propFunc) {
         }
 
         
-        console.log("registration", formData);
         const response = await RegProperty(formData);
         handleOpen();
         propFunc.propFunc(true);

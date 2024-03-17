@@ -30,7 +30,6 @@ export default function PaymentProcedure({ bookingId,fee }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
 
-  console.log("hahaha ..bilaleee");
 
   const handleSubmit = async (e) => {
     

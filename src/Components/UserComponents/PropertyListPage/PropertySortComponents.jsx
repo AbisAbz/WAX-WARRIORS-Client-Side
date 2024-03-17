@@ -14,7 +14,6 @@ function PropertySortComponents({ search }) {
      const fetchProperties = async() => {
        try {
           const response = await fetchPropertiesApi({rating:rating, search:search})
-          console.log("iam there response", response.data.data);
           GenerateError(response.data.message)
           setPropertylist(response.data.data)
 

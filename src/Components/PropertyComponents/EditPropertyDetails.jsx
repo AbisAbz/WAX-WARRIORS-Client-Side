@@ -14,14 +14,12 @@ import {
 import { propertySchema } from '../../Schema/Authentication'
 import {  useFormik } from "formik";
 import { EditProperty } from "../../Api/PropertyApi";
-import { useSelector } from "react-redux";
 import { GenerateSuccess } from "../../Toast/Toast";
 
 
 
 function EditPropertyDetails({propDetails, sendDataToChild}) {
   const [open, setOpen] = useState(false);
-  console.log("iam yjhe details orio ", propDetails._id);
 
   const handleOpen = () => setOpen((cur) => !cur);
   let timesAvailable = ["06:00 AM",
@@ -61,9 +59,7 @@ function EditPropertyDetails({propDetails, sendDataToChild}) {
     validationSchema: propertySchema,
     onSubmit: async (values) => {
       try {
-        console.log("registration", values);
         const response = await EditProperty(values);
-        console.log("iam the response ",response.status);
         if(response.status === 200){
         GenerateSuccess(response.data.message)
         sendDataToChild(true)

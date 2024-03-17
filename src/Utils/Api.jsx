@@ -75,9 +75,7 @@ export const propertyAxiosIntreditInstance = axios.create({
     //=========  User interceptors for error response  ======//
     axiosIntreditInstance.interceptors.response.use(
         (response) => response,
-        (error) => {
-
-      
+        (error) => {    
           if (error.response && error.response.status === 400) {
             GenerateError(error.response.data.message);
           } else if (error.response && error.response.status === 500) {
@@ -96,12 +94,12 @@ export const propertyAxiosIntreditInstance = axios.create({
       
        adminAxiosIntreditInstance.interceptors.response.use(
         (response) => response,
-        (error) => {
-
-      
-          if (error.response && error.response.status === 400) {
+        (error) => {   
+          if (error.response && error.response.status === 401) {
+            console.log("token expired.........");
+            localStorage.removeItem("adminToken");
             GenerateError(error.response.data.message);
-
+            window.location.href = "/admin";
           }
       
           return Promise.reject(error);

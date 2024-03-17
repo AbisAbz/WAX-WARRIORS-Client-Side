@@ -38,7 +38,6 @@ export default function ComplexNavbar() {
                         setTimeout(() => {
                             GenerateSuccess(response.data.message);
                         }, 300);
-                        console.log("iqma the rpoperty owner detaisl ", response.data);
                         dispatch(
                             setPropOwnerDetails({
                                 id: response.data.propOwnerData._id,

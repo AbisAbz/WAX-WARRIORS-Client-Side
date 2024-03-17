@@ -34,9 +34,7 @@
          if(userBookedDate !== null){
         const fetchAllAvailableTimes = async() => {
           try {
-            console.log("user booked date", userBookedDate);
             const rightUserBookedDate = moment(userBookedDate).format('DD-MM-YYYY');
-            console.log("rechanged the user booked date ", rightUserBookedDate);
   const response = await fetchAllAvailableTimesApi({date:rightUserBookedDate, slot:item.slot, openingTime:item.openingTime, closingTime:item.closingTime, propId:item._id })   
     settimesAvailable(response.data.availableTimes)     
           } catch (error) {
@@ -73,7 +71,6 @@ const formik = useFormik({
       values.bookDate = moment(values.bookDate).format('DD-MM-YYYY');
       values.price = serviceAmount
       const response = await slotBookingApi(values)
-      console.log("iam the response booked slot ", response.status);
        if( response.status === 200){
         navigate(`/checkoutpage`, { state: { bookingData: response.data.saveBooking, propertyData: response.data.propertyData , userDetails:response.data.userDetails} });
        }

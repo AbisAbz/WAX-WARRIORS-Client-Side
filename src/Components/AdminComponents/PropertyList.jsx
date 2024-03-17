@@ -7,14 +7,7 @@ import { Avatar,
   CardFooter, 
   CardHeader, 
   Chip, 
-  IconButton, 
-  Input, 
-  Tooltip,
-  Tab, 
   Typography, 
-   Tabs, 
-   TabsHeader,
-   TabsBody,
    } from "@material-tailwind/react";
 import { fetchPropData } from '../../Api/AdminApi';
 import { propAprove } from '../../Api/AdminApi'
@@ -26,26 +19,12 @@ function PropertyList() {
    const [propData, setPropData] = useState([])
    const [switchbtn, setSwitchbtn] = useState("Approved") 
     const TABLE_HEAD = [" Property Name " , " Country ", "State", "View","Status", "Action"];
-    const TABS = [
-      {
-        label: "Property",
-        value: 1,
-        switchTo: "Approved",
-      },
-      {
-        label: "Notification",
-        value: 2,
-        switchTo: "Pending",
-      },
-    ];
-    
 
     useEffect(() => {
 
         const fetchData = async() => {
             try {
                 const response = await fetchPropData()
-                console.log("hellooo", response.data.filtredPropData);
                 if(response) setPropData(response.data.filtredPropData);
                 setStatus(false)
 

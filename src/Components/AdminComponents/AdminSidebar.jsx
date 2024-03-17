@@ -8,8 +8,6 @@ import {
   ListItemSuffix,
 } from "@material-tailwind/react";
 import { FaCommentAlt } from 'react-icons/fa';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import {
   PresentationChartBarIcon,

@@ -113,7 +113,6 @@ export async function EditProperty(propData) {
 
 export async function hidePropertyApi(propId){
   try {
-    console.log("iam the hide prop api ", propId);
     const data = await subAdminApi.post("/api/hideproperty", propId)
     return data;
   } catch (error) {
@@ -123,7 +122,6 @@ export async function hidePropertyApi(propId){
 
 export async function fetchAllBookingsApi(id){
   try {
-    console.log("iam in teh api of fetch all bookings");
     const data = await subAdminApi.post('/api/fetchbookings',id)
     return data
   } catch (error) {

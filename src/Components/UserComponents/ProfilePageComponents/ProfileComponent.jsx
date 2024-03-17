@@ -13,8 +13,6 @@ import { GenerateSuccess } from '../../../Toast/Toast';
 import {
   Card,
   CardBody,
-  CardFooter,
-  Typography,
   Input,
   Button,
 } from "@material-tailwind/react";
@@ -63,7 +61,6 @@ function ProfileComponent() {
     onSubmit:async(values) => {
       try {
         const response = await updateProfileApi(id, values)
-        console.log("iam the response of the update ", response.data.message);
         setProfile(true);
         GenerateSuccess(response.data.message);
       } catch (error) {

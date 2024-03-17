@@ -39,7 +39,6 @@ export default function GoogleSignup() {
         setUser(response.data);
 
         const resback = await SignUpGoogle(response.data);
-        console.log("iam resback", resback);
 
         if (resback.status === 200) {
           localStorage.setItem('userToken', resback.data.userToken);

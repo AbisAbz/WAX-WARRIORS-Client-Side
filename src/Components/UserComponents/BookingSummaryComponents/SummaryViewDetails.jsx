@@ -18,7 +18,6 @@ function SummaryViewDetails() {
     const bookingViewData = async() => {
       try {
         const response = await summaryViewDataApi({bookingId : bookingId})
-        console.log("iam the response ", response.data.data);
         setCancel(false);
         setSummaryViewData(response.data.data)
         

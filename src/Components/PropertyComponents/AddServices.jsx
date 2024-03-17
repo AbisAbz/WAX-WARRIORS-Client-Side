@@ -19,21 +19,13 @@ import {
 export default function AddServices({id, serviceData}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
-    console.log("iam the s4rvce data ", serviceData);
-    console.log("iam the s4rvce id ", id);
 
     const [emitter, setEmitter] = useState(false)
 
 
     useEffect(() => {
-      console.log("iam emitter in  the add service  page of child  ", emitter);
-    },[emitter])
-
-    useEffect(() => {
       if(emitter === true){
-        console.log("iam the person in the yseEffect emmietter in the add service " );
       const sendDataToParent = () => {
-        const abis = "hello abis how are you"
         eventBus.emit('dataEvent', emitter, abis);
       };
       sendDataToParent()
@@ -53,9 +45,7 @@ export default function AddServices({id, serviceData}) {
           onSubmit:async(values) => {
              handleOpen();
             try {
-              console.log("iam the values of post servicing  in the useformik ", values)
               const response = await postService(values)
-               console.log("oiam the response post service ", response);
               if(response) {
                 GenerateSuccess("Your service has been created")
                 setEmitter(true)

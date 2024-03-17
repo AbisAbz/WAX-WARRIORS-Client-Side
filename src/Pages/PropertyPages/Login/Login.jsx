@@ -26,10 +26,8 @@ export default function SimpleRegistrationForm() {
       onSubmit:async(values) => {
         try {
           const response = await propOwnLogin(values)
-          console.log("i came back after the awaiting over", response.data.exist);
   
           if(response.status === 200){
-            console.log("iam in the response status", response.status);
             localStorage.setItem("subAdminToken", response.data.subAdminToken)
             dispatch(setPropOwnerDetails({
                id     : response.data.exist._id,

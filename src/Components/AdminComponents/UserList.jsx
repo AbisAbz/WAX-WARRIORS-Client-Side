@@ -30,9 +30,7 @@ const MembersTable = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetchUsers();
-        console.log("iam the reposnse ", response);
         const userDetails = response.data.users;
-
         setUserData(userDetails);
         setAction(false)
       } catch (error) {

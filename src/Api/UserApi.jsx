@@ -4,11 +4,10 @@ const userApi = axiosIntreditInstance
 
 
 export async function RegUser(signupData) {
-    try {
-      
+    try {    
       const data = await userApi.post("/signup", signupData);
-
       return data;
+
     } catch (err) {
       throw new err(err)
   }
@@ -38,8 +37,8 @@ export async function SignUpGoogle(googleData) {
   try {
 
     const response = await userApi.post('/api/googlesignup', googleData);
-
     return response;
+
   } catch (error) {
     throw new Error("Error in SignUpGoogle");
   }
@@ -66,7 +65,6 @@ export async function fetchPropertyToHome(){
 
 export async function fetchPropertiesApi(propData){
   try {
-    console.log("iam the api propdata ", propData);
      const data = await userApi.post('/api/fetchprop',propData)
      return data
   } catch (error) {
